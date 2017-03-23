@@ -1,0 +1,17 @@
+/.gradle/
+/bin/
+
+*.com
+*.class
+*.dll
+*.exe
+
+*.jar
+*.rar
+*.tar
+*.zip
+*.log
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
