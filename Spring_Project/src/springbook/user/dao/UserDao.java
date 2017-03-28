@@ -1,22 +1,19 @@
 package springbook.user.dao;
 
-import java.sql.Connection;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 
+import springbook.user.domain.Level;
 import springbook.user.domain.User;
 
 public class UserDao {
 	private User user;
 	private DataSource dataSource;
-	private JdbcContext jdbcContext;
+	private JdbcTemplate jdbcTemplate;
 		
 	public User getUser() {
 		return user;
@@ -31,61 +28,53 @@ public class UserDao {
 	}
 
 	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
-
-	public JdbcContext getJdbcContext() {
-		return jdbcContext;
-	}
-
-	public void setJdbcContext(JdbcContext jdbcContext) {
-		this.jdbcContext = jdbcContext;
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
 	public void add(User user) throws ClassNotFoundException, SQLException{		
-		jdbcContext.executeSimpleSql("insert into users(id, name, password) values(?, ?, ?)", user.getId(),user.getName(),user.getPassword());
+		jdbcTemplate.update("insert into users values(?, ?, ?, ?, ?, ?)", user.getId(),user.getName(),user.getPassword(), user.getLevel().value, user.getLogin(), user.getLikes());
 	}
 	
 	public User get(String id) throws ClassNotFoundException, SQLException {
-		Connection c = dataSource.getConnection();
-		PreparedStatement ps = c.prepareStatement("select id, name, password from users where id = ?");
-		ps.setString(1, id);
-		
-		ResultSet rs = ps.executeQuery();
-		
-		if(rs.next()) {
-			this.user = new User();
-			this.user.setId(rs.getString("id"));
-			this.user.setName(rs.getString("name"));
-			this.user.setPassword(rs.getString("password"));
-		}
-		rs.close();
-		ps.close();
-		c.close();
-		
-		if(user == null) throw new EmptyResultDataAccessException(1);
-		
-		return this.user;
+		return jdbcTemplate.queryForObject("select * from users where id = ?", new Object[] {id}, (rs, rowNum) -> { return new User().setId(rs.getString("id")).setName(rs.getString("name")).setPassword(rs.getString("password")).setLevel(rs.getInt("level")).setLogin(rs.getInt("login")).setLikes(rs.getInt("likes"));
+		});
 	}
 	
 	public void deleteAll() throws ClassNotFoundException, SQLException{
-		jdbcContext.executeSimpleSql("truncate users");
+		jdbcTemplate.update("truncate users");
 	}
 	
 	public int getCount() throws ClassNotFoundException, SQLException{
-		int cnt = 0;
-		Connection c = dataSource.getConnection();
-		PreparedStatement ps = c.prepareStatement("SELECT COUNT(*) FROM users");
-		ResultSet rs = ps.executeQuery();
+		return jdbcTemplate.queryForObject("select count(*) from users", Integer.class);
+	}
+
+	public int update(User toBeUpdated) {
+	 	return jdbcTemplate.update("update users set name = ?, password = ?, level = ?, login = ?, likes = ? where id = ?", toBeUpdated.getName(), toBeUpdated.getPassword(), toBeUpdated.getLevel().value, toBeUpdated.getLogin(), toBeUpdated.getLikes(), toBeUpdated.getId());			
+	}
+	
+	public void upgradeLevel(){
+		List<User> userList = jdbcTemplate.queryForList("select * from users", User.class);
 		
-		if(rs.next()) {
-			cnt = rs.getInt(1);
+		for(User user : userList){
+			Boolean changed = null;
+			switch(user.getLevel()){
+			case BASIC:
+				if(user.getLogin() >= 50){
+					user.setLevel(Level.SILVER.value);
+					changed = true;
+				}
+				break;
+			case SILVER:
+				if(user.getLikes() >= 30){
+					user.setLevel(Level.GOLD.value);
+					changed = true;
+				}
+				break;
+			default:
+				changed = false;
+				break;
+			}
+			if(changed) update(user);
 		}
-		
-		rs.close();
-		ps.close();
-		c.close();
-		
-		return cnt;
 	}
 }
