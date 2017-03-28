@@ -52,29 +52,7 @@ public class UserDao {
 	 	return jdbcTemplate.update("update users set name = ?, password = ?, level = ?, login = ?, likes = ? where id = ?", toBeUpdated.getName(), toBeUpdated.getPassword(), toBeUpdated.getLevel().value, toBeUpdated.getLogin(), toBeUpdated.getLikes(), toBeUpdated.getId());			
 	}
 	
-	public void upgradeLevel(){
-		List<User> userList = jdbcTemplate.queryForList("select * from users", User.class);
-		
-		for(User user : userList){
-			Boolean changed = null;
-			switch(user.getLevel()){
-			case BASIC:
-				if(user.getLogin() >= 50){
-					user.setLevel(Level.SILVER.value);
-					changed = true;
-				}
-				break;
-			case SILVER:
-				if(user.getLikes() >= 30){
-					user.setLevel(Level.GOLD.value);
-					changed = true;
-				}
-				break;
-			default:
-				changed = false;
-				break;
-			}
-			if(changed) update(user);
-		}
+	public List<User> getAll(){
+		return jdbcTemplate.queryForList("select * from users", User.class);
 	}
 }

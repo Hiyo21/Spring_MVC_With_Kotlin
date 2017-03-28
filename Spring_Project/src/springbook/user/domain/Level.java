@@ -1,24 +1,31 @@
 package springbook.user.domain;
 
 public enum Level {
-	//Java¿¡¼­ Enum ¸¸µé±â. 
-	// #1. String °ªÇÏ°í, ±× String °ª¿¡ ÇØ´çÇÏ´Â °ªÀÇ pair¸¦ ÁØºñ.
-	BASIC(1), SILVER(2), GOLD(3);
+	//Javaï½¿ï½¡ï½¼ï½­ Enum ï½¸ï½¸ï½µé­ï¿½. 
+	// #1. String ï½°ï½ªï¾‡ï¾ï½°ï¿½, ï½±ï¾— String ï½°ï½ªï½¿ï½¡ ï¾‡ï¾˜ï½´é…©ï¾ï½´ï¾‚ ï½°ï½ªï¾€ï¾‡ pairï½¸ï½¦ ï¾ï¾˜ï½ºï¿½.
+	GOLD(3, null), SILVER(2, GOLD), BASIC(1, SILVER);
 	
-	// #2. °ıÈ£ ¾ÈÀÇ value¸¦ ÀúÀåÇÒ º¯¼ö¸¦ ¼±¾ğ
+	// #2. ï½°ï¿½ï¾ˆï½£ ï½¾ï¾ˆï¾€ï¾‡ valueï½¸ï½¦ ï¾€æƒ•è¡‚ï¾’ ï½ºï½¯ï½¼î“Ÿï½¦ ï½¼ï½±ï½¾ï¿½
 	public final int value;
+	public Level nextLevel;
 	
-	// #3. Constructor¸¦ setter·Î ¼³Á¤ÇÑ´Ù. (¿ÜºÎ¿¡¼­ ¸Ú´ë·Î ¼³Á¤ÀÌ °¡´ÉÇÑ public¸»°í)
-	Level(int value){
+	// #3. Constructorï½¸ï½¦ setterï½·ï¾ ï½¼ï½³ï¾ï½¤ï¾‡ï¾‘ï½´ï¾™. (ï½¿ï¾œï½ºï¾ï½¿ï½¡ï½¼ï½­ ï½¸ï¾šï½´ï¿½ï½·ï¾ ï½¼ï½³ï¾ï½¤ï¾€ï¾Œ ï½°ï½¡ï½´ï¾‰ï¾‡ï¾‘ publicï½¸ï½»ï½°ï¿½)
+	Level(int value, Level nextLevel){
 		this.value = value;
+		this.nextLevel = nextLevel;
 	}
 	
-	// #4. °ªÀ» ¾ò±â À§ÇØ¼­´Â  ¹«Á¶°Ç getter¸¦ ÅëÇØ¼­ °ªÀ» ¾ò´Â´Ù.
+	
+	// #4. ï½°ï½ªï¾€ï½» ï½¾î‡¨ï¿½ ï¾€ï½§ï¾‡ï¾˜ï½¼ï½­ï½´ï¾‚  ï½¹ï½«ï¾ï½¶ï½°ï¾‡ getterï½¸ï½¦ ï¾…ï¿½ï¾‡ï¾˜ï½¼ï½­ ï½°ï½ªï¾€ï½» ï½¾î‡«ï¾‚ï½´ï¾™.
 	public int getIntValue(){
 		return value;
 	}
 	
-	// #5. Value ¸»°í key°ªÀÇ stringÀ» ¾ò±â À§ÇÑ methodµµ Ãß°¡. Java¿¡¼­ÀÇ enumÀº ´Ü¼øÈ÷ string°ú intÀÇ pair°ªÀÌ ¾Æ´Ï´Ù.
+	public Level getNextLevel(){
+		return nextLevel;
+	}
+	
+	// #5. Value ï½¸ï½»ï½°ï¿½ keyï½°ï½ªï¾€ï¾‡ stringï¾€ï½» ï½¾î‡¨ï¿½ ï¾€ï½§ï¾‡ï¾‘ methodï½µï½µ ï¾ƒï¾Ÿï½°ï½¡. Javaï½¿ï½¡ï½¼ï½­ï¾€ï¾‡ enumï¾€ï½º ï½´ï¾œï½¼î™§ï¿½ stringï½°ï¿½ intï¾€ï¾‡ pairï½°ï½ªï¾€ï¾Œ ï½¾ï¾†ï½´ï¾ï½´ï¾™.
 	public static Level valueOf(int value){
 		switch(value){
 		case 1 : return BASIC;

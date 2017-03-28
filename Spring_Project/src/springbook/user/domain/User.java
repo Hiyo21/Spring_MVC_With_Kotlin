@@ -87,5 +87,10 @@ public class User {
 		return "User [level=" + level + ", login=" + login + ", likes=" + likes + ", id=" + id + ", name=" + name
 				+ ", password=" + password + "]";
 	}
+	
+	public void upgradeLevel() {
+		if(level.nextLevel == null) throw new IllegalStateException("can't upgrade. @highest level.");
+		this.level = level.nextLevel;
+	}
 }
 
