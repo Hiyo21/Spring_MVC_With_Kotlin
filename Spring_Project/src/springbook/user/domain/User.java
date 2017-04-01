@@ -7,6 +7,7 @@ public class User {
 	String id;
 	String name;
 	String password;
+	String email;
 	
 	public User() {}
 	
@@ -17,15 +18,17 @@ public class User {
 		this.level = Level.BASIC;
 		this.login = 0;
 		this.likes = 0;
+		this.email = "";
 	}
 	
-	public User(String id, String name, String password, Level level, int login, int likes) {
+	public User(String id, String name, String password, Level level, int login, int likes, String email) {
 		this.id = id;
 		this.name = name;
 		this.password = password;
 		this.level = level;
 		this.login = login;
 		this.likes = likes;
+		this.email = email;
 	}
 
 	public Level getLevel() {
@@ -81,13 +84,23 @@ public class User {
 		this.password = password;
 		return this;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
 
+	public User setEmail(String email) {
+		this.email = email;
+		return this;
+	}
+
+	
 	@Override
 	public String toString() {
 		return "User [level=" + level + ", login=" + login + ", likes=" + likes + ", id=" + id + ", name=" + name
-				+ ", password=" + password + "]";
+				+ ", password=" + password + ", email=" + email + "]";
 	}
-	
+
 	public void upgradeLevel() {
 		if(level.nextLevel == null) throw new IllegalStateException("can't upgrade. @highest level.");
 		this.level = level.nextLevel;

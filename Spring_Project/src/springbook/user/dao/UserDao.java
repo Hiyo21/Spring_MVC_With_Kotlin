@@ -1,13 +1,12 @@
 package springbook.user.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import springbook.user.domain.Level;
 import springbook.user.domain.User;
 
 public class UserDao {
@@ -31,28 +30,28 @@ public class UserDao {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	public void add(User user) throws ClassNotFoundException, SQLException{		
-		jdbcTemplate.update("insert into users values(?, ?, ?, ?, ?, ?)", user.getId(),user.getName(),user.getPassword(), user.getLevel().value, user.getLogin(), user.getLikes());
+	public void add(User user) {		
+		jdbcTemplate.update("insert into users values(?, ?, ?, ?, ?, ?, ?)", user.getId(),user.getName(),user.getPassword(), user.getLevel().value, user.getLogin(), user.getLikes(), user.getEmail());
 	}
 	
-	public User get(String id) throws ClassNotFoundException, SQLException {
-		return jdbcTemplate.queryForObject("select * from users where id = ?", new Object[] {id}, (rs, rowNum) -> { return new User().setId(rs.getString("id")).setName(rs.getString("name")).setPassword(rs.getString("password")).setLevel(rs.getInt("level")).setLogin(rs.getInt("login")).setLikes(rs.getInt("likes"));
+	public User get(String id) {
+		return jdbcTemplate.queryForObject("select * from users where id = ?", new Object[] {id}, (rs, rowNum) -> { return new User().setId(rs.getString("id")).setName(rs.getString("name")).setPassword(rs.getString("password")).setLevel(rs.getInt("level")).setLogin(rs.getInt("login")).setLikes(rs.getInt("likes")).setEmail(rs.getString("email"));
 		});
 	}
 	
-	public void deleteAll() throws ClassNotFoundException, SQLException{
+	public void deleteAll() {
 		jdbcTemplate.update("truncate users");
 	}
 	
-	public int getCount() throws ClassNotFoundException, SQLException{
+	public int getCount() {
 		return jdbcTemplate.queryForObject("select count(*) from users", Integer.class);
 	}
 
 	public int update(User toBeUpdated) {
-	 	return jdbcTemplate.update("update users set name = ?, password = ?, level = ?, login = ?, likes = ? where id = ?", toBeUpdated.getName(), toBeUpdated.getPassword(), toBeUpdated.getLevel().value, toBeUpdated.getLogin(), toBeUpdated.getLikes(), toBeUpdated.getId());			
+	 	return jdbcTemplate.update("update users set name = ?, password = ?, level = ?, login = ?, likes = ?, email = ? where id = ?", toBeUpdated.getName(), toBeUpdated.getPassword(), toBeUpdated.getLevel().value, toBeUpdated.getLogin(), toBeUpdated.getLikes(), toBeUpdated.getEmail(), toBeUpdated.getId());			
 	}
 	
 	public List<User> getAll(){
-		return jdbcTemplate.queryForList("select * from users", User.class);
+		return jdbcTemplate.query("select * from users", new BeanPropertyRowMapper<User>(User.class));
 	}
 }

@@ -8,9 +8,9 @@
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="org.postgresql.Driver" />
 		<!--  <property name="url" value="jdbc:postgresql://192.168.2.102:5432/postgres" />-->
-		<property name="url" value="jdbc:postgresql://localhost:5432/postgres"/>
-		<property name="username" value="postgres" />
-		<property name="password" value="1" />
+		<property name="url" value="jdbc:postgresql://mypractice.c5ro0f7bp99v.ap-northeast-1.rds.amazonaws.com:5432/myPractice"/>
+		<property name="username" value="shoonara2" />
+		<property name="password" value="clee0121" />
 	</bean>
 	
 	<bean id="userDao" class="springbook.user.dao.UserDao">
@@ -21,7 +21,25 @@
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	
-	<bean id="userService" class="springbook.user.service.UserService">
-		<property name="userDao" ref="userDao"/>
+	<bean id="userService" class="springbook.user.service.UserServiceTx">
+		<property name="ptManager" ref="ptManager"/>
+		<property name="userService" ref="userServiceImpl"/>
+	</bean>
+	
+	<bean id="userServiceImpl" class="springbook.user.service.UserServiceImpl">
+				<property name="userDao" ref="userDao"/>
+				<property name="mailSender" ref="mailSender"/>
+	</bean>
+	
+	<bean id="ptManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="username" value="shoonara21@gmail.com" />
+		<property name="password" value="clee2249l" />
 	</bean>
 </beans>

@@ -32,9 +32,9 @@ public class UserDaoTest {
 	
 	@Before
 	public void addUsers() {
-		user1 = new User("h1","hello","world", Level.BASIC, 1, 0);
-		user2 = new User("h2", "hello", "spring", Level.SILVER, 55, 10);
-		user3 = new User("h3", "hi", "me", Level.GOLD, 100, 40);
+		user1 = new User("h1","hello","world", Level.BASIC, 1, 0, "h1@practice.com");
+		user2 = new User("h2", "hello", "spring", Level.SILVER, 55, 10, "h2@practice.com");
+		user3 = new User("h3", "hi", "me", Level.GOLD, 100, 40, "h3@practice.com");
 	}
 	
 	@Test
@@ -75,6 +75,7 @@ public class UserDaoTest {
 		assertEquals(user1.getLevel(), user2.getLevel());
 		assertEquals(user1.getLogin(), user2.getLogin());
 		assertEquals(user1.getLikes(), user2.getLikes());
+		assertEquals(user1.getEmail(), user2.getEmail());
 	}
 	
 	@Test
@@ -84,7 +85,7 @@ public class UserDaoTest {
 		
 		User toBeUpdated = dao.get(user1.getId());
 		
-		toBeUpdated.setName("hhh").setPassword("111").setLevel(Level.GOLD.value).setLogin(1000).setLikes(999);
+		toBeUpdated.setName("hhh").setPassword("111").setLevel(Level.GOLD.value).setLogin(1000).setLikes(999).setEmail("hhh@email.com");
 		exitCode = dao.update(toBeUpdated);
 		assertEquals(exitCode, 1);
 		

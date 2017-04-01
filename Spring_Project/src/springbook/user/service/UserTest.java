@@ -36,4 +36,12 @@ public class UserTest {
 			user.upgradeLevel();
 		}
 	}
+	
+	@Test
+	public void newUser(){
+		User defaultUser = new User("h7", "hhh", "jjk");
+		assertEquals(defaultUser.getLevel(), Level.BASIC);
+		assertEquals(defaultUser.getLogin(), 0);
+		assertEquals(defaultUser.getLikes(), 0);
+	}
 }
