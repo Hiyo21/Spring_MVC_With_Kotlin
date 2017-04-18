@@ -8,6 +8,7 @@
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
 		<config>src/springbook/learningtest/junit/junit.xml</config>
+		<config>src/FactoryBeanTest-context.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

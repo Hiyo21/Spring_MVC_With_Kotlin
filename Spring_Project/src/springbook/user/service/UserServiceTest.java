@@ -1,30 +1,26 @@
 package springbook.user.service;
 
 import static org.junit.Assert.assertEquals;
-import static springbook.user.service.UserServiceImpl.LIKE_COUNT_FOR_GOLD;
-import static springbook.user.service.UserServiceImpl.LOGIN_COUNT_FOR_SILVER;
+import static org.mockito.Mockito.*;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import springbook.user.dao.MockUserDao;
 import springbook.user.dao.UserDao;
 import springbook.user.domain.Level;
 import springbook.user.domain.User;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/Test_ApplicationContext.xml")
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration("/Test_ApplicationContext.xml")
 public class UserServiceTest extends UserServiceImpl{
 	@Autowired
 	UserServiceImpl userServiceImpl;
@@ -43,21 +39,55 @@ public class UserServiceTest extends UserServiceImpl{
 	
 	@Test
 	public void upgradeLevels() {
-		userDao.deleteAll();
-		for(User user: users) {
-			userDao.add(user);
-		}
+		UserServiceImpl userServiceImpl = new UserServiceImpl();
+		
+		MockUserDao mockUserDao = new MockUserDao(this.users);
+		userServiceImpl.setUserDao(mockUserDao);
 		MockMailSender mockMailSender = new MockMailSender();
 		userServiceImpl.setMailSender(mockMailSender);
 		userServiceImpl.upgradeLevels();
 		
-		checkLevel(users.get(0), false);
-		checkLevel(users.get(1), true);
-		checkLevel(users.get(2), false);
-		checkLevel(users.get(3), true);
-		checkLevel(users.get(4), false);
+		List<User> updated= mockUserDao.getUpdated();
+		assertEquals(updated.size(), 2);
+		checkUserAndLevel(updated.get(0), "h2", Level.SILVER);
+		checkUserAndLevel(updated.get(1), "h4", Level.GOLD);
+		
+		
+		List<String> request = mockMailSender.getRequests();
+		assertEquals(request.size(), 2);
+		assertEquals(request.get(0), "shoonara21@gmail.com");
+		assertEquals(request.get(1), "shoonara21@gmail.com");
 	}
 	
+	
+	@Test
+	public void mockUpgradeLevels() throws Exception {
+		UserServiceImpl userServiceImpl = new UserServiceImpl();
+		
+		UserDao mockUserDao = mock(UserDao.class);
+		when(mockUserDao.getAll()).thenReturn(this.users);
+		userServiceImpl.setUserDao(mockUserDao);
+		
+		MailSender mockMailSender = mock(MailSender.class);
+		userServiceImpl.setMailSender(mockMailSender);
+		
+		userServiceImpl.upgradeLevels();
+		
+		verify(mockUserDao, times(2)).update(any(User.class));
+		verify(mockUserDao, times(2)).update(any(User.class));
+		verify(mockUserDao).update(users.get(1));
+		assertEquals(users.get(1).getLevel(), Level.SILVER);
+		verify(mockUserDao).update(users.get(3));
+		assertEquals(users.get(3).getLevel(), Level.GOLD);
+		
+	}
+
+	
+	private void checkUserAndLevel(User updated, String expectedId, Level expectedLevel) {
+		assertEquals(updated.getId(), expectedId);
+		assertEquals(updated.getLevel(), expectedLevel);
+	}
+
 	private void checkLevel(User user, boolean isUpgraded) {
 		User userUpdate = userDao.get(user.getId());
 		if(isUpgraded){
@@ -65,7 +95,7 @@ public class UserServiceTest extends UserServiceImpl{
 		}else{
 			assertEquals(userUpdate.getLevel(), user.getLevel());
 		}
-	}	
+	}
 }
 
 

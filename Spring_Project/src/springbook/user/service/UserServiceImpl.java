@@ -53,7 +53,13 @@ public class UserServiceImpl implements UserService {
 	private void upgradeLevel(User user) {
 		user.upgradeLevel();
 		userDao.update(user); 
-		sendUpgradeNoticeMail(user);
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setFrom("shoonara21@gmail.com");
+		message.setTo("shoonara21@gmail.com");
+		message.setSubject("upgrade안내");
+		message.setText("사용자님의 등급이 " + user.getLevel().name() + "으로 승급되었습니다.");
+		if(MailSender.class.isInstance(MockMailSender.class)) mailSender.send(message);
+		else sendUpgradeNoticeMail(user);
 	}
 
 	private void sendUpgradeNoticeMail(User user) {
