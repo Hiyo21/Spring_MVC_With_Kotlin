@@ -1,6 +1,6 @@
 package springbook.user.service;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
@@ -9,23 +9,25 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import springbook.user.dao.MockUserDao;
 import springbook.user.dao.UserDao;
 import springbook.user.domain.Level;
 import springbook.user.domain.User;
 
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration("/Test_ApplicationContext.xml")
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("/Test_ApplicationContext.xml")
 public class UserServiceTest extends UserServiceImpl{
-	@Autowired
-	UserServiceImpl userServiceImpl;
-	@Autowired
-	UserDao userDao;
+	@Autowired UserService userService;
+	@Autowired UserService testUserService; 
+	@Autowired UserDao userDao;
 	List<User> users;
 	
 	@Before
@@ -81,7 +83,20 @@ public class UserServiceTest extends UserServiceImpl{
 		assertEquals(users.get(3).getLevel(), Level.GOLD);
 		
 	}
-
+	
+	@Test
+	public void upgradeAllOrNothing() {
+		userDao.deleteAll();
+		for(User user : users) userDao.add(user);
+		
+		try{
+			this.testUserService.upgradeLevels();
+			fail("TestUserServiceException expected");
+		}catch(Exception e){
+			
+		}
+		checkLevel(users.get(1), false);
+	}
 	
 	private void checkUserAndLevel(User updated, String expectedId, Level expectedLevel) {
 		assertEquals(updated.getId(), expectedId);
@@ -97,7 +112,6 @@ public class UserServiceTest extends UserServiceImpl{
 		}
 	}
 }
-
 
 class MockMailSender implements MailSender {
 	private List<String> requests = new ArrayList<String>();

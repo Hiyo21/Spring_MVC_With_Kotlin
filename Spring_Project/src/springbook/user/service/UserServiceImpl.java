@@ -1,6 +1,5 @@
 package springbook.user.service;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
 
@@ -9,8 +8,6 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import springbook.user.dao.UserDao;
 import springbook.user.domain.Level;
@@ -94,7 +91,13 @@ public class UserServiceImpl implements UserService {
 			throw new IllegalArgumentException("unknown level");
 		}
 	}
-
-
 	
+	static class TestUserServiceImpl extends UserServiceImpl{
+		private String id = "madnite1";
+		
+		protected void upgradeLevel(User user) throws Exception {
+			if (user.getId().equals(this.id)) throw new Exception();
+			super.upgradeLevel(user);
+		}
+	}
 }

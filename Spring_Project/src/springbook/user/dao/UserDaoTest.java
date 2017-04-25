@@ -21,10 +21,8 @@ import springbook.user.domain.User;
 @RunWith(SpringJUnit4ClassRunner.class)  //Spring의 test context framework인 Junit 확장기능 지정
 @ContextConfiguration(locations="/Test_ApplicationContext.xml")
 public class UserDaoTest {
-	@Autowired
-	ApplicationContext context;
-	@Autowired
-	UserDao dao;
+	@Autowired ApplicationContext context;
+	@Autowired UserDao dao;
 	User user1;
 	User user2;
 	User user3;

@@ -8,9 +8,9 @@
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="org.postgresql.Driver" />
 		<!--  <property name="url" value="jdbc:postgresql://192.168.2.102:5432/postgres" />-->
-		<property name="url" value="jdbc:postgresql://localhost:5432/postgres"/>
-		<property name="username" value="postgres" />
-		<property name="password" value="1234" />
+		<property name="url" value="jdbc:postgresql://mypractice.c5ro0f7bp99v.ap-northeast-1.rds.amazonaws.com:5432/myPractice"/>
+		<property name="username" value="shoonara2" />
+		<property name="password" value="clee0121" />
 	</bean>
 	
 	<bean id="userDao" class="springbook.user.dao.UserDao">
