@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
 		message.setSubject("upgrade안내");
 		message.setText("사용자님의 등급이 " + user.getLevel().name() + "으로 승급되었습니다.");
 		if(MailSender.class.isInstance(MockMailSender.class)) mailSender.send(message);
-		else sendUpgradeNoticeMail(user);
+		//else sendUpgradeNoticeMail(user);
 	}
 
 	private void sendUpgradeNoticeMail(User user) {
@@ -92,6 +92,26 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 	
+	@Override
+	public void update(User user) {
+		userDao.update(user);
+	}
+
+	@Override
+	public void deleteAll() {
+		userDao.deleteAll();
+	}
+
+	@Override
+	public User get(String id) {
+		return userDao.get(id);
+	}
+
+	@Override
+	public List<User> getAll() {
+		return userDao.getAll();
+	}
+	
 	static class TestUserServiceImpl extends UserServiceImpl{
 		private String id = "madnite1";
 		
@@ -100,4 +120,5 @@ public class UserServiceImpl implements UserService {
 			super.upgradeLevel(user);
 		}
 	}
+
 }

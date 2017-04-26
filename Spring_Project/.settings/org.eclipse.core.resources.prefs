@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
+encoding//src/springbook/user/dao/UserDaoJdbc.java=UTF-8
 encoding//src/springbook/user/dao/UserDaoTest.java=UTF-8
 encoding//src/springbook/user/domain/Level.java=UTF-8

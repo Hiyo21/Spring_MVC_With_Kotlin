@@ -30,8 +30,12 @@
 		<property name="password" value="clee0121" />
 	</bean>
 	
-	<bean id="userDao" class="springbook.user.dao.UserDao">
+	<bean id="userDao" class="springbook.user.dao.UserDaoJdbc">
 		<property name="dataSource" ref="dataSource" />
+		<property name="sqlService" ref="sqlService" />
+	</bean>
+	
+	<bean id="sqlService" class="springbook.user.sqlservice.XmlSqlService">
 	</bean>
 	
 	<bean id="jdbcContext" class="springbook.user.dao.JdbcContext">

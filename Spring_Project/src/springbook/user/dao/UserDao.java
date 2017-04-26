@@ -11,9 +11,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import springbook.user.domain.User;
 
 public class UserDao {
-	private User user;
-	private DataSource dataSource;
-	private JdbcTemplate jdbcTemplate;
+	protected User user;
+	protected DataSource dataSource;
+	protected JdbcTemplate jdbcTemplate;
 		
 	public User getUser() {
 		return user;
