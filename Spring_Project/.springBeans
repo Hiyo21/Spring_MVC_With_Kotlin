@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beansProjectDescription>
 	<version>1</version>
-	<pluginVersion><![CDATA[3.8.3.201612191259-RELEASE]]></pluginVersion>
+	<pluginVersion><![CDATA[3.8.4.201703310634-RELEASE]]></pluginVersion>
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>
@@ -9,6 +9,7 @@
 	<configs>
 		<config>src/springbook/learningtest/junit/junit.xml</config>
 		<config>src/FactoryBeanTest-context.xml</config>
+		<config>src/OxmTest-context.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

@@ -20,7 +20,7 @@ public class UserDaoJdbc extends UserDao {
 	
 	@Override
 	public void add(User user){
-		jdbcTemplate.update(this.sqlService.getSql("userAdd"), user.getId(), user.getName(), user.getPassword(), user.getEmail(), user.getLevel().getIntValue(), user.getLogin(), user.getLikes());
+		jdbcTemplate.update(this.sqlService.getSql("userAdd"), user.getId(), user.getName(), user.getPassword(), user.getLevel().getIntValue(), user.getLogin(), user.getLikes(), user.getEmail());
 	}
 	
 	@Override
