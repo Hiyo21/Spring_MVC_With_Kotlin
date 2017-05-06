@@ -1,18 +1,15 @@
 package springbook.user.dao;
 
-import java.util.List;
-
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-
 import springbook.user.domain.User;
+
+import javax.sql.DataSource;
+import java.util.List;
 
 public class UserDao {
 	protected User user;
-	protected DataSource dataSource;
+	public DataSource dataSource;
 	protected JdbcTemplate jdbcTemplate;
 		
 	public User getUser() {
@@ -23,12 +20,8 @@ public class UserDao {
 		this.user = user;
 	}
 
-	public DataSource getDataSource() {
-		return dataSource;
-	}
-
 	public void setDataSource(DataSource dataSource) {
-		this.jdbcTemplate = new JdbcTemplate(dataSource);
+		this.dataSource = dataSource;
 	}
 
 	public void add(User user) {		

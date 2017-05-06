@@ -1,9 +1,9 @@
 package springbook.issuetracker.sqlservice;
 
-import java.util.Map;
-
 import springbook.user.sqlservice.SqlRegistry;
 import springbook.user.sqlservice.SqlUpdateFailureException;
+
+import java.util.Map;
 
 public interface UpdatableSqlRegistry extends SqlRegistry {
 	public void updateSql(String key, String sql) throws SqlUpdateFailureException;

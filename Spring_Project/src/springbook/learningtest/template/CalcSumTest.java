@@ -1,11 +1,11 @@
 package springbook.learningtest.template;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class CalcSumTest {
 	Calculator calculator;

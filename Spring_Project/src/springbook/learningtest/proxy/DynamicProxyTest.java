@@ -1,9 +1,5 @@
 package springbook.learningtest.proxy;
 
-import static org.junit.Assert.assertEquals;
-
-import java.lang.reflect.Proxy;
-
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.junit.Test;
@@ -12,10 +8,13 @@ import org.springframework.aop.Pointcut;
 import org.springframework.aop.framework.ProxyFactoryBean;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.aop.support.NameMatchMethodPointcut;
-
 import springbook.learningtest.jdk.Hello;
 import springbook.learningtest.jdk.HelloTarget;
 import springbook.learningtest.jdk.UppercaseHandler;
+
+import java.lang.reflect.Proxy;
+
+import static org.junit.Assert.assertEquals;
 
 public class DynamicProxyTest{
 	@Test

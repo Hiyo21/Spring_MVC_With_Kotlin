@@ -1,10 +1,5 @@
 package springbook.learningtest.embeddeddatabase;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.List;
-import java.util.Map;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +7,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.Assert.assertEquals;
 
 public class EmbeddedDatabaseTest {
 	EmbeddedDatabase db;
@@ -37,10 +37,10 @@ public class EmbeddedDatabaseTest {
 
 		assertEquals((int)template.queryForObject("select count(*) from sqlmap", Integer.class), 2);
 		List<Map<String, Object>>list = template.queryForList("select * from sqlmap order by key_");
-		assertEquals((String)list.get(0).get("key_"), "KEY1");
-		assertEquals((String)list.get(0).get("sql_"), "SQL1");
-		assertEquals((String)list.get(1).get("key_"), "KEY2");
-		assertEquals((String)list.get(1).get("sql_"), "SQL2");
+		assertEquals(list.get(0).get("key_"), "KEY1");
+		assertEquals(list.get(0).get("sql_"), "SQL1");
+		assertEquals(list.get(1).get("key_"), "KEY2");
+		assertEquals(list.get(1).get("sql_"), "SQL2");
 	}
 	
 	@Test

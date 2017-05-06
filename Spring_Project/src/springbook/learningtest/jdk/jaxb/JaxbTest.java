@@ -1,18 +1,16 @@
 package springbook.learningtest.jdk.jaxb;
 
-import static org.junit.Assert.*;
-
-import java.io.IOException;
-import java.util.List;
+import org.junit.Test;
+import springbook.user.sqlservice.SqlType;
+import springbook.user.sqlservice.Sqlmap;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import java.io.IOException;
+import java.util.List;
 
-import org.junit.Test;
-
-import springbook.user.sqlservice.SqlType;
-import springbook.user.sqlservice.Sqlmap;
+import static org.junit.Assert.assertEquals;
 
 public class JaxbTest {
 	@Test

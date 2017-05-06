@@ -1,15 +1,12 @@
 package springbook.user.sqlservice;
 
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.annotation.PostConstruct;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-
-import springbook.user.dao.UserDao;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class XmlSqlService implements SqlService, SqlRegistry, SqlReader {
 	private SqlReader sqlReader;

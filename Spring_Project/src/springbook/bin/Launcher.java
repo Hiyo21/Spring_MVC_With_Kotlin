@@ -1,9 +1,9 @@
 package springbook.bin;
 
+import org.junit.runner.JUnitCore;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import org.junit.runner.JUnitCore;
 
 public class Launcher{
 	public static void main(String[] args) {

@@ -1,23 +1,24 @@
 package springbook.user.dao;
 
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 import springbook.user.domain.User;
 import springbook.user.sqlservice.SqlService;
 
+import javax.sql.DataSource;
+import java.util.List;
+
+@Repository
 public class UserDaoJdbc extends UserDao {
-	private SqlService sqlService;
+	@Autowired private SqlService sqlService;
 
-	public SqlService getSqlService() {
-		return sqlService;
+	@Autowired
+	public void setDataSource(DataSource dataSource) {
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	public void setSqlService(SqlService sqlService) {
-		this.sqlService = sqlService;
-	}
-	
 	@Override
 	public void add(User user){
 		jdbcTemplate.update(this.sqlService.getSql("userAdd"), user.getId(), user.getName(), user.getPassword(), user.getLevel().getIntValue(), user.getLogin(), user.getLikes(), user.getEmail());

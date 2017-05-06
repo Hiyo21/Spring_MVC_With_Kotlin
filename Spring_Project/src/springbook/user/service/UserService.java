@@ -1,10 +1,9 @@
 package springbook.user.service;
 
-import java.util.List;
-
 import org.springframework.transaction.annotation.Transactional;
-
 import springbook.user.domain.User;
+
+import java.util.List;
 
 @Transactional
 public interface UserService {

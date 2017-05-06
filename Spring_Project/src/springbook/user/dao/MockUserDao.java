@@ -1,9 +1,9 @@
 package springbook.user.dao;
 
+import springbook.user.domain.User;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import springbook.user.domain.User;
 
 public class MockUserDao extends UserDao {
 	private List<User> users;

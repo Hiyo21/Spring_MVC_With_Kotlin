@@ -1,12 +1,11 @@
 package springbook.user.service;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import springbook.user.domain.Level;
 import springbook.user.domain.User;
+
+import static org.junit.Assert.assertEquals;
 
 public class UserTest {
 	User user;

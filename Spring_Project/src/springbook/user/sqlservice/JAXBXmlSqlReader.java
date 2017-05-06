@@ -1,12 +1,11 @@
 package springbook.user.sqlservice;
 
-import java.io.InputStream;
+import springbook.user.dao.UserDao;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-
-import springbook.user.dao.UserDao;
+import java.io.InputStream;
 
 public class JAXBXmlSqlReader implements SqlReader {
 	private static final String DEFAULT_SQLMAP_FILE = "sqlmap.xml";

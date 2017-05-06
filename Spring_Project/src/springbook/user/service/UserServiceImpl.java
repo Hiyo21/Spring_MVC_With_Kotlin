@@ -1,23 +1,23 @@
 package springbook.user.service;
 
-import java.util.List;
-import java.util.Properties;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
-
 import springbook.user.dao.UserDao;
 import springbook.user.domain.Level;
 import springbook.user.domain.User;
 
+import java.util.List;
+import java.util.Properties;
+
+@Service("userService")
 public class UserServiceImpl implements UserService {
-	UserDao userDao;
-	@Autowired
-	PlatformTransactionManager ptManager;
-	MailSender mailSender;
+	@Autowired UserDao userDao;
+	@Autowired PlatformTransactionManager ptManager;
+	@Autowired MailSender mailSender;
 
 	public static final int LOGIN_COUNT_FOR_SILVER = 50;
 	public static final int LIKE_COUNT_FOR_GOLD = 30;

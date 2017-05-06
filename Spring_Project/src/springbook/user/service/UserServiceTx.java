@@ -1,14 +1,12 @@
 package springbook.user.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
-
-import springbook.user.dao.UserDao;
 import springbook.user.domain.User;
+
+import java.util.List;
 
 public class UserServiceTx implements UserService{
 	@Autowired

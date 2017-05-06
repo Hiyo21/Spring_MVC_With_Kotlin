@@ -1,12 +1,12 @@
 package springbook.learningtest.spring.pointcut;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
-import org.springframework.aop.aspectj.AspectJExpressionPointcut;
+import static org.junit.Assert.assertEquals;
 
 public class PointcutExpressionTest {
 

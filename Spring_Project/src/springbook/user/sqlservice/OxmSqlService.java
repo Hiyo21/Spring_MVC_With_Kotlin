@@ -1,16 +1,14 @@
 package springbook.user.sqlservice;
 
-import java.io.IOException;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.oxm.Unmarshaller;
+import springbook.user.dao.UserDao;
 
 import javax.annotation.PostConstruct;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
-
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.oxm.Unmarshaller;
-
-import springbook.user.dao.UserDao;
+import java.io.IOException;
 
 public class OxmSqlService implements SqlService{
 	private final BaseSqlService baseSqlService = new BaseSqlService();
@@ -44,7 +42,7 @@ public class OxmSqlService implements SqlService{
 	
 	private class OxmSqlReader implements SqlReader{
 		private Unmarshaller unmarshaller;
-		private static final String DEFAULT_SQLMAP = "sqlmap.xml";
+		private static final String DEFAULT_SQLMAP = "/sqlmap.xml";
 		private Resource sqlmap = new ClassPathResource(DEFAULT_SQLMAP, UserDao.class);
 		
 		public void setUnmarshaller(Unmarshaller unmarshaller) {

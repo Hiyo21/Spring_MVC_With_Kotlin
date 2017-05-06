@@ -1,9 +1,9 @@
 package springbook.user.sqlservice;
 
+import springbook.issuetracker.sqlservice.UpdatableSqlRegistry;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import springbook.issuetracker.sqlservice.UpdatableSqlRegistry;
 
 public class ConcurrentHashMapSqlRegistry implements UpdatableSqlRegistry {
 	private Map<String, String> sqlMap = new ConcurrentHashMap<String, String>();

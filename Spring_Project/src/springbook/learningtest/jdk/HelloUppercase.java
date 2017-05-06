@@ -1,9 +1,5 @@
 package springbook.learningtest.jdk;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
-
 public class HelloUppercase implements Hello {
 	Hello hello;
 	
