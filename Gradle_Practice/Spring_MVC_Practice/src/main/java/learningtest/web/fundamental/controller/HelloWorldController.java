@@ -1,27 +1,28 @@
 package learningtest.web.fundamental.controller;
 
-import learningtest.web.fundamental.model.HelloWorld;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by shoon on 2017/06/19.
  */
-public class HelloWorldController implements Controller {
-    @Autowired HelloWorld helloWorld;
+@Controller
+public class HelloWorldController {
+    private static final Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
 
-    public ModelAndView handleRequest(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
-        String str = httpServletRequest.getParameter("id");
-        String sayHelloResult = helloWorld.sayHello(str);
-        Map<String, String> resultMap = new HashMap<>();
-        resultMap.put("HelloMessage", sayHelloResult);
+    @RequestMapping("/hello")
+    public String hello(@RequestParam("name") String name, ModelMap map){
+        map.put("message", "Hello! " + name);
+        return "/learningtest_first.jsp";
+    }
 
-        return new ModelAndView("/learningtest_first.jsp", resultMap);
+    @RequestMapping("what")
+    public void what(){
+        logger.info("whaT?");
     }
 }
