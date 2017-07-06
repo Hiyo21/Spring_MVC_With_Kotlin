@@ -2,7 +2,23 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!-- must for @MVC style development -->
     <mvc:annotation-driven/>
+
+    <!-- resources : images, javascript files, css files, etc. -->
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+
+    <!-- determines how to handle view -->
+    <mvc:view-resolvers>
+        <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+            <property name="prefix" value="/WEB-INF/views/"/>
+            <property name="suffix" value=".jsp"/>
+        </bean>
+    </mvc:view-resolvers>
+
+    <!-- must for @MVC style development2 : searches controller classes under base-package -->
+    <context:component-scan base-package="mvc"/>
 </beans>
