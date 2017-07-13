@@ -6,13 +6,20 @@
         </layout>
     </appender>
 
-    <logger name="org.springframework" level="debug" additivity="false">
+    <logger name="org.springframework" level="INFO" additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
     <root level="INFO">
         <appender-ref ref="STDOUT" />
     </root>
 
+    <logger name="org.mybatis" level="TRACE">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="mvc.persistence.MemberDAOImpl" level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+    </logger>
 </configuration>
 
 <!-- WARN: Logback with SLF4J as of 17.07.05 -->
