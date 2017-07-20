@@ -17,10 +17,6 @@
         <property name="password" value="#{props['db.password']}"/>
     </bean>
 
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-
     <!-- mybatis : SqlSessionFactory bean 登録 -->
     <bean id = "sqlSessionFactory" class= "org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
@@ -28,7 +24,7 @@
         <property name="mapperLocations" value="mybatis/mappers/*Mapper.xml"/>
     </bean>
 
-    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache" autowire="byName">
         <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
 

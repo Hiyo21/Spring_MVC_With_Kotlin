@@ -9,11 +9,11 @@
 	<classpath>
 		<dir name="C:/Users/shoon/git/practice_workspace/Gradle_Practice/Spring_MVC_With_Kotlin/build/resources/main">
 		</dir>
-		<dir name="C:/Users/shoon/git/practice_workspace/Gradle_Practice/Spring_MVC_With_Kotlin/build/classes/main">
+		<dir name="C:/Users/shoon/git/practice_workspace/Gradle_Practice/Spring_MVC_With_Kotlin/build/classes/java/main">
 		</dir>
 		<dir name="C:/Users/shoon/git/practice_workspace/Gradle_Practice/Spring_MVC_With_Kotlin/build/resources/test">
 		</dir>
-		<dir name="C:/Users/shoon/git/practice_workspace/Gradle_Practice/Spring_MVC_With_Kotlin/build/classes/test">
+		<dir name="C:/Users/shoon/git/practice_workspace/Gradle_Practice/Spring_MVC_With_Kotlin/build/classes/java/test">
 		</dir>
 		<dir name="C:/Users/shoon/git/practice_workspace/Gradle_Practice/Spring_MVC_With_Kotlin/build/kotlin-classes/main">
 		</dir>
@@ -23,7 +23,7 @@
 
 	<web>
 		<link target="/">
-			<dir name="C:/Users/shoon/git/practice_workspace/Gradle_Practice/Spring_MVC_With_Kotlin/web">
+			<dir name="C:/Users/shoon/git/practice_workspace/Gradle_Practice/Spring_MVC_With_Kotlin/src/main/webapp">
 			</dir>
 		</link>
 	</web>

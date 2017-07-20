@@ -9,7 +9,7 @@
     <mvc:annotation-driven/>
 
     <!-- resources : images, javascript files, css files, etc. -->
-    <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <mvc:resources mapping="/resources/**/*" location="/resources/"/>
 
     <!-- determines how to handle view -->
     <mvc:view-resolvers>

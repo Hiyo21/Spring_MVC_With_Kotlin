@@ -16,7 +16,7 @@ import org.springframework.web.context.WebApplicationContext
 
 @RunWith(SpringJUnit4ClassRunner::class)
 @WebAppConfiguration
-@ContextConfiguration(locations = arrayOf("file:src/main/webapp/WEB-INF/**/dispatcher-servlet.xml"))
+@ContextConfiguration("file:/src/main/webapp/WEB-INF/**/dispatcher-servlet.xml")
 class MockMvcTest {
     val logger: Logger = LoggerFactory.getLogger(this.javaClass)
 
