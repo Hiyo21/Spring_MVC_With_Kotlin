@@ -7,7 +7,7 @@
 
     <!-- must for @MVC style development -->
     <mvc:annotation-driven/>
-
+    <context:component-scan base-package="mvc"/>
     <!-- resources : images, javascript files, css files, etc. -->
     <mvc:resources mapping="/resources/**/*" location="/resources/"/>
 
@@ -19,6 +19,8 @@
         </bean>
     </mvc:view-resolvers>
 
-    <!-- must for @MVC style development2 : searches controller classes under base-package -->
-    <context:component-scan base-package="mvc"/>
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
 </beans>

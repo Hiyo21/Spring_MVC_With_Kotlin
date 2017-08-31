@@ -13,7 +13,7 @@ import java.time.LocalDateTime
 
 @RunWith(SpringJUnit4ClassRunner::class)
 @ContextConfiguration(locations = arrayOf("/applicationContext/test-applicationContext.xml"))
-@Transactional
+@Transactional("transactionManager")
 open class MemberTest {
     @Autowired lateinit var memberDAO:MemberDAO
     lateinit var member0:Member

@@ -1,9 +1,12 @@
 package mvc.persistence
 
+import mvc.domain.Criteria
 import mvc.domain.Post
 import org.apache.ibatis.session.SqlSession
+import org.springframework.stereotype.Repository
 import javax.annotation.Resource
 
+@Repository
 class PostDAOImpl:PostDAO {
     @Resource lateinit var sqlSession: SqlSession
 
@@ -12,7 +15,7 @@ class PostDAOImpl:PostDAO {
     }
 
     override fun insertPost(post: Post): Int {
-        return sqlSession.insert("insertPost", post)
+        return sqlSession.insert(withNamespace("insertPost"), post)
     }
 
     override fun deletePost(postNo: Int): Int {
@@ -27,15 +30,23 @@ class PostDAOImpl:PostDAO {
         return sqlSession.update(withNamespace("updatePost"), post)
     }
 
-    override fun selectPost(postNo: String): Post {
-        return sqlSession.selectOne(withNamespace("selectPost"), postNo)
+    override fun selectPost(postNo: Int): Post {
+        return sqlSession.selectOne<Post>(withNamespace("selectPost"), postNo)
     }
 
     override fun selectAllPosts(): List<Post> {
-        return sqlSession.selectList(withNamespace("selectAllPosts"))
+        return sqlSession.selectList<Post>(withNamespace("selectAllPosts"))
     }
 
-    override fun getTime(): String {
-        return sqlSession.selectOne("mvc.mapper.PostMapper.getTime")
+    override fun selectPagedPosts(pageNumber: Int): List<Post> {
+        return sqlSession.selectList<Post>(withNamespace("selectPagedPosts"), pageNumber)
+    }
+
+    override fun selectCriteria(criteria: Criteria):List<Post> {
+        return sqlSession.selectList<Post>(withNamespace("selectCriteria"), criteria)
+    }
+
+    override fun countPaging(criteria: Criteria): Int {
+        return sqlSession.selectOne(withNamespace("selectCountPaging"), criteria)
     }
 }

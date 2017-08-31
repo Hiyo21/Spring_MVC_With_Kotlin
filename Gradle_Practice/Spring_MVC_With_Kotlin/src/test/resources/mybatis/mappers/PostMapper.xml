@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mvc.mapper.PostMapper">
+
+    <insert id="insertPost" parameterType="mvc.domain.Post" useGeneratedKeys="true" keyColumn="post_no">
+        insert into t_Post(post_title, content, poster) values(#{postTitle}, #{content}, #{poster})
+    </insert>
+
+    <delete id="deletePost" parameterType="int">
+        delete from t_Post where post_no = #{postNo}
+    </delete>
+
+    <update id="updatePost" parameterType="mvc.domain.Post">
+        update t_Post set post_title = #{postTitle}, content = #{content}, poster = #{poster}, modify_date = now() where post_no = #{postNo}
+    </update>
+
+    <select id="selectPost" parameterType="int" resultType="mvc.domain.Post">
+        select * from t_Post where post_no = #{postNo}
+    </select>
+
+    <select id="selectAllPosts" resultType="mvc.domain.Post">
+        select * from t_Post
+    </select>
+
+    <delete id="deleteAllPosts">
+        delete from t_Post
+    </delete>
+</mapper>

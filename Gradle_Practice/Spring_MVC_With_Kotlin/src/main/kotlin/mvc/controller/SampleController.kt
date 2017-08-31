@@ -15,6 +15,7 @@ class SampleController {
     // loggingをインスタンス化。LoggerFactory.getLoggerで生成　（newじゃない！）
     private val logger: Logger = LoggerFactory.getLogger(this.javaClass)
 
+
     // @RequestMapping : 特定URIとのマッピング情報を記録
     @RequestMapping("actionA")
     fun actionA(){

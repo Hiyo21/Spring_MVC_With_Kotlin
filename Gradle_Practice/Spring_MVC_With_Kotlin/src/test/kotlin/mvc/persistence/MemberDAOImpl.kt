@@ -14,11 +14,11 @@ class MemberDAOImpl:MemberDAO {
     }
 
     override fun getTime(): String {
-        return sqlSession.selectOne("mvc.mapper.MemberMapper.getTime")
+        return sqlSession.selectOne(withNamespace("getTime"))
     }
 
     override fun insertMember(member: Member): Int {
-        return sqlSession.insert("insertMember",member)
+        return sqlSession.insert(withNamespace("insertMember"),member)
     }
 
     override fun deleteMember(userid: String): Int {
@@ -40,7 +40,4 @@ class MemberDAOImpl:MemberDAO {
     override fun selectAllMembers(): List<Member> {
         return sqlSession.selectList(withNamespace("selectAllMembers"))
     }
-
-
-
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  This is the JRebel configuration file. It maps the running application to your IDE workspace, enabling JRebel reloading for this project.
+  Refer to https://manuals.zeroturnaround.com/jrebel/standalone/config.html for more information.
+-->
+<application generated-by="intellij" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.zeroturnaround.com" xsi:schemaLocation="http://www.zeroturnaround.com http://update.zeroturnaround.com/jrebel/rebel-2_1.xsd">
+
+	<classpath>
+		<dir name="C:/Users/shoon/git/practice_workspace/Gradle_Practice/Spring_MVC_With_Kotlin/build/resources/main/"/>
+		<dir name="C:/Users/shoon/git/practice_workspace/Gradle_Practice/Spring_MVC_With_Kotlin/build/classes/java/main/"/>
+		<dir name="C:/Users/shoon/git/practice_workspace/Gradle_Practice/Spring_MVC_With_Kotlin/build/resources/test/"/>
+		<dir name="C:/Users/shoon/git/practice_workspace/Gradle_Practice/Spring_MVC_With_Kotlin/build/classes/java/test/"/>
+		<dir name="C:/Users/shoon/git/practice_workspace/Gradle_Practice/Spring_MVC_With_Kotlin/build/kotlin-classes/main/"/>
+		<dir name="C:/Users/shoon/git/practice_workspace/Gradle_Practice/Spring_MVC_With_Kotlin/build/kotlin-classes/test/"/>
+		<dir name="C:/Users/shoon/git/practice_workspace/Gradle_Practice/Spring_MVC_With_Kotlin/out/production/classes/"/>
+		<dir name="C:/Users/shoon/git/practice_workspace/Gradle_Practice/Spring_MVC_With_Kotlin/out/production/resources/"/>
+	</classpath>
+
+	<web>
+		<link target="/">
+			<dir name="C:/Users/shoon/git/practice_workspace/Gradle_Practice/Spring_MVC_With_Kotlin/src/main/webapp"/>
+		</link>
+	</web>
+
+</application>
